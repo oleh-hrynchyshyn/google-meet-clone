@@ -1,0 +1,47 @@
+import { makeStyles } from "@mui/styles";
+
+export const useStyles = makeStyles({
+	container: {
+		display: "flex",
+		flexDirection: "column",
+		backgroundColor: "#36373a",
+		// background-color: "#36373a",
+		borderRadius: 8,
+		position: "relative",
+		minHeight: "200px",
+	},
+	microphone: {
+		width: "26px",
+		height: "26px",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		position: "absolute",
+		top: "10px",
+		right: "10px",
+		color: "#fff",
+		borderRadius: "50%",
+		background: "rgba(32,33,36,0.302)",
+	},
+	avatar: {
+		display: "flex",
+		flexShrink: 0,
+		flex: 5,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	name: {
+		flex: 1,
+		fontFamily: '"Google Sans",Roboto,Arial,sans-serif',
+		fontSize: "1rem",
+		fontWeight: 500,
+		lineHeight: "1.25rem",
+		color: "#fff",
+		letterSpacing: ".2px",
+		overflow: "hidden",
+		textOverflow: "ellipsis",
+		position: "absolute",
+		bottom: "10px",
+		left: "10px",
+	},
+});
