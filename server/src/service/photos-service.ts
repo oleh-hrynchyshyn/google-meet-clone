@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 class PhotosService {
 	public async getPhoto(gfs: Grid.Grid, filename: string) {
 		try {
-			if (!filename) filename = "avatar.jpg";
+			if (!filename) filename = "image.jpg";
 			const file = await gfs.files.findOne({ filename });
 			const readStream = gfs.createReadStream(file.filename);
 			return readStream;

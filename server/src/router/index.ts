@@ -1,13 +1,12 @@
 import { Router } from "express";
 import upload from "../middleware/upload";
 import photosContoller from "../controllers/photos-contoller";
+import userController from "../controllers/user-controller";
 const routers = Router();
 
 routers.get("/getRandomImage", photosContoller.getRandomImage);
 
-routers.get("/getAllUsers", (req, res) => {
-	return res.json("hello1");
-});
+routers.get("/getAllUsers", userController.getAllUsers);
 
 routers.post("/uploadUserPhoto", upload("avatar").single(""), (req, res) => {
 	photosContoller.uploadPhoto(req, res, "user");
