@@ -4,18 +4,16 @@ import Grid from "gridfs-stream";
 import photosService from "../service/photos-service";
 
 class PhotosController {
-	public uploadPhoto(req: Request, res: Response, collection: String) {
-		if (req.file === undefined) return res.send("you must select a file");
-		const imgUrl = `${process.env.API}/file/${collection}Photo/${req.file.filename}`;
-		return res.send(imgUrl);
+	public getPhotoUrl(req: Request, res: Response, collection: String) {
+		const responce = photosService.getPhotoUrl(req, collection);
+		return res.send(responce);
 	}
 
 	public async getPhoto(req: Request, res: Response, collection: string) {
-		let gfs;
-		const conn = mongoose.connection;
-		gfs = Grid(conn.db, mongoose.mongo);
-		gfs.collection(collection);
-		const responce = await photosService.getPhoto(gfs, req.params.filename);
+		const responce = await photosService.getPhoto(
+			req.params.filename,
+			collection,
+		);
 		responce.pipe(res);
 	}
 

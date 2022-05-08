@@ -35,5 +35,9 @@ export const useStyles = makeStyles({
 		borderRadius: "50%",
 		justifyContent: "center",
 		backgroundColor: "#36373a",
+		"&:hover": {
+			cursor: "pointer",
+			backgroundColor: "#3f4145",
+		},
 	},
 });

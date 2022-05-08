@@ -5,7 +5,6 @@ export const useStyles = makeStyles({
 		display: "flex",
 		flexDirection: "column",
 		backgroundColor: "#36373a",
-		// background-color: "#36373a",
 		borderRadius: 8,
 		position: "relative",
 		minHeight: "200px",

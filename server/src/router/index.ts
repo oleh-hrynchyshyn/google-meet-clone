@@ -9,11 +9,11 @@ routers.get("/getRandomImage", photosContoller.getRandomImage);
 routers.get("/getAllUsers", userController.getAllUsers);
 
 routers.post("/uploadUserPhoto", upload("avatar").single(""), (req, res) => {
-	photosContoller.uploadPhoto(req, res, "user");
+	photosContoller.getPhotoUrl(req, res, "user");
 });
 
 routers.post("/uploadCatPhoto", upload("cats").single(""), (req, res) => {
-	photosContoller.uploadPhoto(req, res, "cat");
+	photosContoller.getPhotoUrl(req, res, "cat");
 });
 
 routers.get("/file/userPhoto/:filename", (req, res) => {
