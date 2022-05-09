@@ -5,7 +5,13 @@ class PhotosController {
 	public getPhotoUrl(collection: string) {
 		return (req: Request, res: Response, next: NextFunction) => {
 			try {
-				const responce = photosService.getPhotoUrl(req, collection);
+				if (req.file === undefined) {
+					return "you must select a file";
+				}
+				const responce = photosService.getPhotoUrl(
+					req.file.filename,
+					collection,
+				);
 				return res.send(responce);
 			} catch (e) {
 				next(e);
@@ -30,7 +36,7 @@ class PhotosController {
 	public async getRandomImage(req: Request, res: Response, next: NextFunction) {
 		try {
 			const responce = await photosService.getRandomImage();
-			responce.pipe(res);
+			return res.send(responce);
 		} catch (e) {
 			next(e);
 		}

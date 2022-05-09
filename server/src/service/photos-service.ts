@@ -4,11 +4,8 @@ import mongoose from "mongoose";
 import { Request } from "express";
 import { ApiError } from "../exceptions/api-error";
 class PhotosService {
-	public getPhotoUrl(req: Request, collection: string) {
-		if (req.file === undefined) {
-			return "you must select a file";
-		}
-		const imgUrl = `${process.env.API}/file/${collection}Photo/${req.file.filename}`;
+	public getPhotoUrl(filename: string, collection: string) {
+		const imgUrl = `${process.env.API}/file/${collection}Photo/${filename}`;
 		return imgUrl;
 	}
 
@@ -26,8 +23,7 @@ class PhotosService {
 	}
 
 	private getRandomInt(max: number) {
-		max = Math.floor(max);
-		return Math.floor(Math.random() * (max - 1));
+		return Math.floor(Math.random() * max);
 	}
 
 	public async getRandomImage() {
@@ -36,11 +32,11 @@ class PhotosService {
 
 		await PhotosModel.find({}, (err, elem) => {
 			let index = this.getRandomInt(count);
-			if (index >= count) index = count - 1;
 			photoObj = elem[index].toObject();
+			console.log(index, photoObj);
 		});
 
-		return this.getPhoto(photoObj.filename, "cats");
+		return this.getPhotoUrl(photoObj.filename, "cat");
 	}
 }
 
