@@ -15,6 +15,7 @@ export const useStyles = makeStyles({
 	left: {
 		display: "flex",
 		alignItems: "center",
+		justifyContent: "center",
 	},
 	time: {
 		margin: "0 12px",
@@ -39,5 +40,8 @@ export const useStyles = makeStyles({
 			cursor: "pointer",
 			backgroundColor: "#3f4145",
 		},
+	},
+	buttonLeft: {
+		backgroundColor: "#202124",
 	},
 });

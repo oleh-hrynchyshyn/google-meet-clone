@@ -8,20 +8,20 @@ routers.get("/getRandomImage", photosContoller.getRandomImage);
 
 routers.get("/getAllUsers", userController.getAllUsers);
 
-routers.post("/uploadUserPhoto", upload("avatar").single(""), (req, res) => {
-	photosContoller.getPhotoUrl(req, res, "user");
-});
+routers.post(
+	"/uploadUserPhoto",
+	upload("avatar").single(""),
+	photosContoller.getPhotoUrl("user"),
+);
 
-routers.post("/uploadCatPhoto", upload("cats").single(""), (req, res) => {
-	photosContoller.getPhotoUrl(req, res, "cat");
-});
+routers.post(
+	"/uploadCatPhoto",
+	upload("cats").single(""),
+	photosContoller.getPhotoUrl("cat"),
+);
 
-routers.get("/file/userPhoto/:filename", (req, res) => {
-	photosContoller.getPhoto(req, res, "avatar");
-});
+routers.get("/file/userPhoto/:filename", photosContoller.getPhoto("avatar"));
 
-routers.get("/file/catPhoto/:filename", (req, res) => {
-	photosContoller.getPhoto(req, res, "cats");
-});
+routers.get("/file/catPhoto/:filename", photosContoller.getPhoto("cats"));
 
 export default routers;

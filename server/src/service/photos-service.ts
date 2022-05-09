@@ -2,8 +2,9 @@ import Grid from "gridfs-stream";
 import PhotosModel from "../models/photos-model";
 import mongoose from "mongoose";
 import { Request } from "express";
+import { ApiError } from "../exceptions/api-error";
 class PhotosService {
-	public getPhotoUrl(req: Request, collection: String) {
+	public getPhotoUrl(req: Request, collection: string) {
 		if (req.file === undefined) {
 			return "you must select a file";
 		}
@@ -12,18 +13,16 @@ class PhotosService {
 	}
 
 	public async getPhoto(filename: string, collection: string) {
-		try {
-			let gfs: Grid.Grid;
-			const conn = mongoose.connection;
-			gfs = Grid(conn.db, mongoose.mongo);
-			gfs.collection(collection);
-			if (!filename) filename = "image.jpg";
-			const file = await gfs.files.findOne({ filename });
-			const readStream = gfs.createReadStream(file.filename);
-			return readStream;
-		} catch (e) {
-			console.log(e);
+		let gfs: Grid.Grid;
+		const conn = mongoose.connection;
+		gfs = Grid(conn.db, mongoose.mongo);
+		gfs.collection(collection);
+		if (!filename) {
+			throw ApiError.InternalServerError();
 		}
+		const file = await gfs.files.findOne({ filename });
+		const readStream = gfs.createReadStream(file.filename);
+		return readStream;
 	}
 
 	private getRandomInt(max: number) {
@@ -32,20 +31,16 @@ class PhotosService {
 	}
 
 	public async getRandomImage() {
-		try {
-			const count = await PhotosModel.count();
-			let photoObj: any;
+		const count = await PhotosModel.count();
+		let photoObj: any;
 
-			await PhotosModel.find({}, (err, elem) => {
-				let index = this.getRandomInt(count);
-				if (index >= count) index = count - 1;
-				photoObj = elem[index].toObject();
-			});
+		await PhotosModel.find({}, (err, elem) => {
+			let index = this.getRandomInt(count);
+			if (index >= count) index = count - 1;
+			photoObj = elem[index].toObject();
+		});
 
-			return this.getPhoto(photoObj?.filename, "cats");
-		} catch (err) {
-			console.log(err);
-		}
+		return this.getPhoto(photoObj.filename, "cats");
 	}
 }
 
