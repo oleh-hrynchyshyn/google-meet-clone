@@ -33,7 +33,6 @@ class PhotosService {
 		await PhotosModel.find({}, (err, elem) => {
 			let index = this.getRandomInt(count);
 			photoObj = elem[index].toObject();
-			console.log(index, photoObj);
 		});
 
 		return this.getPhotoUrl(photoObj.filename, "cat");
