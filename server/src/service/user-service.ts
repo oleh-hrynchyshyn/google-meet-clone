@@ -1,4 +1,5 @@
 import UserModel from "../models/user-model";
+import { usersMockList } from "../mock/common";
 
 class UserService {
 	public async getAllUsers() {
@@ -8,6 +9,16 @@ class UserService {
 			});
 		});
 		return list;
+	}
+
+	public async createNewUser() {
+		const arr = await Promise.all(
+			usersMockList.map(async (user) => {
+				const newUser = new UserModel({ ...user });
+				return await newUser.save();
+			}),
+		);
+		return true;
 	}
 }
 

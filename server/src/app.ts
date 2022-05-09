@@ -21,13 +21,13 @@ const start = async () => {
 
 		await mongoose.connect(process.env.DB, connectionParams);
 		console.log("connected to mongoDb");
+
+		app.listen(PORT, () => {
+			console.log(`server is running on ${PORT} port`);
+		});
 	} catch (err) {
 		console.log("error", err);
 	}
-
-	app.listen(PORT, () => {
-		console.log(`server is running on ${PORT} port`);
-	});
 };
 
 start();

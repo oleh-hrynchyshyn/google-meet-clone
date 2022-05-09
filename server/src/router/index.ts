@@ -24,4 +24,6 @@ routers.get("/file/userPhoto/:filename", photosContoller.getPhoto("avatar"));
 
 routers.get("/file/catPhoto/:filename", photosContoller.getPhoto("cats"));
 
+routers.post("/createNewUser", userController.createNewUser);
+
 export default routers;

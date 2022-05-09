@@ -6,6 +6,11 @@ class UserController {
 		const responce = await userService.getAllUsers();
 		return res.send(responce);
 	}
+
+	public async createNewUser(req: Request, res: Response) {
+		const responce = await userService.createNewUser();
+		return res.send(responce);
+	}
 }
 
 export default new UserController();
