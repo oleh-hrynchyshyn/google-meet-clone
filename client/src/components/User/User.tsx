@@ -6,7 +6,7 @@ import MicOffIcon from "@mui/icons-material/MicOff";
 
 import { useStyles } from "./styles";
 
-const UserWindow: React.FC = () => {
+const User: React.FC = () => {
 	const styles = useStyles();
 	return (
 		<>
@@ -24,4 +24,4 @@ const UserWindow: React.FC = () => {
 	);
 };
 
-export default UserWindow;
+export default User;
