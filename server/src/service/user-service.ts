@@ -3,11 +3,7 @@ import { usersMockList } from "../mock/common";
 
 class UserService {
 	public async getAllUsers() {
-		const list = new Promise(async (resolve) => {
-			await UserModel.find({}, (err, elems) => {
-				resolve(elems);
-			});
-		});
+		const list = await UserModel.find({}).select("-_id -__v");
 		return list;
 	}
 
