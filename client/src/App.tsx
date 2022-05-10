@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import User from "./components/User";
@@ -9,25 +9,23 @@ import { getUsersRequest } from "./redux/users/actions";
 import { IUser } from "./interfaces/user";
 
 const App: React.FC = () => {
-	const [arr, setArr] = useState<any>([]);
+	const styles = useStyles();
 	const dispatch = useDispatch();
-	const { users, loading } = useSelector((store: IRootReducer) => store.users);
+	const { users, loading } = useSelector((state: IRootReducer) => state.users);
+
+	const loadSurvayer = useCallback(async () => {
+		dispatch(getUsersRequest());
+	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getUsersRequest());
+		loadSurvayer();
 	}, []);
 
-	useEffect(() => {
-		setArr(users);
-	}, [users]);
-
-	const styles = useStyles();
-	const x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 	return (
 		<main>
 			<div className={styles.container}>
-				{arr.map((user: IUser, index: number) => (
-					<User key={index} data={user} />
+				{users.map((user: IUser) => (
+					<User key={user.id} data={user} />
 				))}
 			</div>
 			<Footer />
