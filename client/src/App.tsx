@@ -25,7 +25,13 @@ const App: React.FC = () => {
 		<main>
 			<div className={styles.container}>
 				{users.map((user: IUser) => (
-					<User key={user.id} data={user} />
+					<User
+						key={user.id}
+						id={user.id}
+						avatar={user.avatar}
+						cameraOn={user.cameraOn}
+						name={user.name}
+					/>
 				))}
 			</div>
 			<Footer />

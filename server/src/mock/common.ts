@@ -76,3 +76,13 @@ export const usersMockList: Array<User> = [
 		cameraOn: false,
 	},
 ];
+
+export const PhotosMockList = [
+	"1_worlds-most-beautiful-cats-1-57fb53b6755fc__700.jpg",
+	"6ed215f9d65be648fdc93b23f4f6fcec.jpg",
+	"99b84f35260e112efd7109d5f9acf9a0_L.jpg",
+	"250460e95268d6f849b5d27e6e98362b.jpg",
+	"1619541010_52-oir_mobi-p-nyashnie-kotiki-zhivotnie-krasivo-foto-57-730x856.jpg",
+	"1619619348_59-oir_mobi-p-samie-milie-kotiki-zhivotnie-krasivo-foto-65.jpg",
+	"cat-3602557_960_720.jpg",
+];
